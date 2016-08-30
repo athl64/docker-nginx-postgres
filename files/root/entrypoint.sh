@@ -2,7 +2,7 @@
 
 set -e
 
-chown -R www-data:www-data /web /var/log/php
+chown -R www-data:www-data /var/log/php
 
 service postgresql start
 
