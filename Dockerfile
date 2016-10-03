@@ -59,16 +59,16 @@ RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php/7.0/fpm/pool.d/w
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php\/cgi.log/' /etc/php/7.0/fpm/php.ini && \
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php\/cli.log/' /etc/php/7.0/cli/php.ini
 
-RUN /etc/init.d/postgresql start
-
 COPY files/root /
 
 COPY files/root/etc/postgres_template_conf/config.inc.php /usr/share/phppgadmin/conf/config.inc.php
+
+RUN /etc/init.d/postgresql start
 
 WORKDIR /web
 
 VOLUME ["/web"]
 
-EXPOSE 80 443 3306 9000
+EXPOSE 80 443 5432 9000
 
 ENTRYPOINT ["/entrypoint.sh"]
